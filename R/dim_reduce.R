@@ -29,6 +29,8 @@
 #' 
 dim_reduce <- function(X, Q=NULL, Q_max=100){
 
+  message("`fMRItools::dim_reduce` is deprecated and will be moved to `templateICAr` in the next update.\n")
+
   svd_XtX <- PCA(X, Q=Q, Q_max=Q_max)
   U <- svd_XtX$u
   D1 <- svd_XtX$d[1:Q]
@@ -55,33 +57,4 @@ dim_reduce <- function(X, Q=NULL, Q_max=100){
     C_diag=C_diag, 
     Q=Q
   )
-}
-
-#' Check \code{Q2_max}. DEPRECATED.
-#'
-#' Check \code{Q2_max} and set it if \code{NULL}.
-#' 
-#' This function is deprecated (moved to \code{templateICAr}).
-#'
-#' @param Q2_max,nQ,nT The args
-#' @return \code{Q2_max}, clamped to acceptable range of values.
-#' @keywords internal
-Q2_max_check <- function(Q2_max, nQ, nT){
-  # [TO DO]: Delete this function.
-  if (!is.null(Q2_max)) {
-    if (round(Q2_max) != Q2_max || Q2_max <= 0) {
-      stop('`Q2_max` must be `NULL` or a non-negative integer.')
-    }
-  } else {
-    Q2_max <- pmax(round(nT*.50 - nQ), 1)
-  }
-
-  # This is to avoid the area of the pesel objective function that spikes close
-  #   to rank(X), which often leads to nPC close to rank(X)
-  if (Q2_max > round(nT*.75 - nQ)) {
-    warning('`Q2_max` too high, setting to 75% of T.')
-    Q2_max <- round(nT*.75 - nQ)
-  }
-
-  Q2_max
 }
