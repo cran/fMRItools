@@ -1,7 +1,7 @@
 Package: fMRItools
 Type: Package
 Title: Routines for Common fMRI Processing Tasks
-Version: 0.3.1
+Version: 0.3.3
 Authors@R: c(
     person(given = "Amanda",
            family = "Mejia",
@@ -26,17 +26,18 @@ Description: Supports fMRI (functional magnetic resonance imaging)
 Depends: R (>= 3.5.0)
 License: GPL-3
 Encoding: UTF-8
-Imports: stats
-Suggests: ciftiTools, corpcor, gifti, knitr, rmarkdown, robustbase,
-        pesel, RNifti, oro.nifti, gsignal, testthat (>= 3.0.0), covr,
-        fda, quantreg, graphics, grDevices
+Imports: stats, matrixStats
+Suggests: ciftiTools, corpcor, expm, gifti, knitr, rmarkdown,
+        robustbase, pesel, RNifti, oro.nifti, templateICAr (>= 0.8.0),
+        gsignal, testthat (>= 3.0.0), covr, fda, quantreg, graphics,
+        grDevices
 RoxygenNote: 7.2.3
 URL: https://github.com/mandymejia/fMRItools
 BugReports: https://github.com/mandymejia/fMRItools/issues
 NeedsCompilation: no
-Packaged: 2023-06-27 07:48:18 UTC; ddpham
+Packaged: 2023-09-29 02:42:53 UTC; ddpham
 Author: Amanda Mejia [aut, cre],
   Damon Pham [aut] (<https://orcid.org/0000-0001-7563-4727>),
   Mark Fiecas [ctb]
 Repository: CRAN
-Date/Publication: 2023-06-29 11:50:02 UTC
+Date/Publication: 2023-09-29 04:30:02 UTC
