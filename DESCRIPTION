@@ -1,7 +1,7 @@
 Package: fMRItools
 Type: Package
 Title: Routines for Common fMRI Processing Tasks
-Version: 0.3.3
+Version: 0.4.2
 Authors@R: c(
     person(given = "Amanda",
            family = "Mejia",
@@ -35,9 +35,9 @@ RoxygenNote: 7.2.3
 URL: https://github.com/mandymejia/fMRItools
 BugReports: https://github.com/mandymejia/fMRItools/issues
 NeedsCompilation: no
-Packaged: 2023-09-29 02:42:53 UTC; ddpham
+Packaged: 2023-11-21 14:42:08 UTC; ddpham
 Author: Amanda Mejia [aut, cre],
   Damon Pham [aut] (<https://orcid.org/0000-0001-7563-4727>),
   Mark Fiecas [ctb]
 Repository: CRAN
-Date/Publication: 2023-09-29 04:30:02 UTC
+Date/Publication: 2023-11-21 15:20:02 UTC
