@@ -1,6 +1,6 @@
-9ab9011920b272a23ff8854ceaed68de *DESCRIPTION
-13b240b443a3f688afa4082d931ac888 *NAMESPACE
-2ecea520901569e8a5f4e9d5807ba49e *NEWS.md
+d638379d461461f68799762b0b10d21f *DESCRIPTION
+30c6bfd79e3c2ec594602a8404a7d986 *NAMESPACE
+47e3e9a98938b780f5c1578b92e4d09d *NEWS.md
 d20133ae7070af4c4de5a770de8884c1 *R/CompCor.R
 ad09df3ee187b1767eccd81a13a512fb *R/CompCor_HCP.R
 f6907e6bb2e256d2c557e36be0977365 *R/DCT_FFT_detrending.R
@@ -10,9 +10,9 @@ bf479768d673710f5a665e692f591483 *R/UT.R
 ab3413f749d18743e723ecc6716d8baa *R/bandstop_filter.R
 a00d0c9d34ba44cae9b628a388f1be96 *R/carpetplot.R
 2e95b64dd8c45116e3bf011d649f4db8 *R/despike_3D.R
-bb6e58ad9485979237e87db4c6ae298e *R/dim_reduce.R
+39d92381f3891377ac306874a9650dc7 *R/dice_overlap.R
 6957addc606000ef18149b0a5d62631c *R/dual_reg.R
-7458ebbd7824f89219ca635f63a2dca9 *R/dual_reg_parc.R
+b7120ca396933e9a8032931454004f1d *R/dual_reg_parc.R
 e0f9e541be17fe1fc6c3d8f4588fc9c6 *R/expand_RPs.R
 196ead0b81526cea8d87c5ce03a6fc84 *R/fMRItools-package.R
 c9d2382fb0701416d491255267f74eb8 *R/format_data.R
@@ -21,8 +21,8 @@ c9d2382fb0701416d491255267f74eb8 *R/format_data.R
 cc6aa8df15bd697acbf339cac7dc146f *R/infer_format_ifti.R
 2d5fc8ba7ba4018f2a0cd180ad92d4e6 *R/norm_BOLD.R
 4964d544db5792c2fb190d378c2563ce *R/nuisance_regression.R
-7fc5ee967c054caf5c4709784c88dd8a *R/plot_FC.R
-9ebddef36fdcb9c2c59847768e53920f *R/plot_FC_gg.R
+0aef9a09334074b6dff5497a55f45376 *R/plot_FC.R
+3deaff79d6ede0f5c45f51e3be9e93f4 *R/plot_FC_gg.R
 5551331b93c7fa4892c151931d3b60ca *R/read_nifti.R
 3533088ca9479bb0be2b4fb1f1082dd1 *R/rox_args_docs.R
 947174e655d2f5f5b36184b663156f5e *R/scale_matrix.R
@@ -53,7 +53,7 @@ eea9bd4279809b7404378a175384d986 *man/check_req_ifti_pkg.Rd
 cb45fbb55851a198e29f1753bee532b6 *man/colCenter.Rd
 1efe68e394a4537061f4d2ea7a0e3c73 *man/color_palette.Rd
 7d9ea124f962ae73d606d46cc33155e6 *man/coordlist_to_vol.Rd
-504d20336eb7665ec8eac3aed8645790 *man/cor_mat.Rd
+d886f24285eaefd9916c06b5f764770d *man/cor_mat.Rd
 8950b18991b9d9e54df2ef4061899be1 *man/crop_vol.Rd
 3bcb8a8f2dc63bfd8e5a5deb285dd056 *man/data_CompCor_Params.Rd
 ec6b603ebe13c5113c28f4bb9c7f1cf7 *man/dct_bases.Rd
@@ -61,8 +61,8 @@ ec6b603ebe13c5113c28f4bb9c7f1cf7 *man/dct_bases.Rd
 5c9b2aaa33be20f8dc9d3e721332223a *man/despike_3D.Rd
 e887db1b669fb050b1b57c931597f7de *man/despike_3D.interpolate.Rd
 b905be6e84f9899af6c64ae60a6826af *man/despike_3D.qreg.Rd
+28fe769c40aa5e751d4d2ec248093457 *man/dice_overlap.Rd
 324151338819104765bbbde1ba0305f5 *man/dilate_mask_vol.Rd
-fb6aaf7f2c6369cc95baa647be51280b *man/dim_reduce.Rd
 0a93a0f75e62df409950394a5158d292 *man/dual_reg.Rd
 222bbda1a22cd7fea50a03753b9fbe86 *man/dual_reg_parc.Rd
 8421e3ae60e973f8d905fd21c760ebaf *man/erode_mask_vol.Rd
@@ -96,7 +96,7 @@ bc2ce10413af37c481e62822f286655a *man/nuisance_regression.Rd
 9c4c193c93889d1be4752c037db8fc1b *man/pad_vol.Rd
 9671345d463076eb51a2f3060f943757 *man/pct_sig.Rd
 726e633e8fd81991b7b76600c035e278 *man/plot_FC.Rd
-60d8c5665160db33e27840499a69f364 *man/plot_FC_gg.Rd
+0cb9d59a813302aaf65d74faa6d04675 *man/plot_FC_gg.Rd
 fa8b4ba1f229310781785414079b166e *man/read_nifti.Rd
 d61227de7e26da7e918ace63f40c7853 *man/rowMedians2.Rd
 f14595311aafea4d6893570e2fddb951 *man/scale_design_mat.Rd
@@ -115,4 +115,4 @@ bc459bf0a4b635b90201c8e12a6a4718 *man/sys_path.Rd
 3f48a6c827d90fde95faefac8cd4fbb0 *man/vox_locations.Rd
 70984273c03add4b4786edcfedef334f *tests/run_fMRItools_tests.R
 55a77e81b0d6df68924a1251bef92681 *tests/testthat.R
-5824e5c096b77982832575f2cb87e0ac *tests/testthat/test-misc.R
+04d974e91a0de85bf2b43fba6a0f51d4 *tests/testthat/test-misc.R
