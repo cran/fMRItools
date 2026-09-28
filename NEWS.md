@@ -1,3 +1,8 @@
+# 0.8.0
+
+* `norm_BOLD` overhaul: big regression; update scaling.
+* Replace `dice_overlap` with `dice_coef`. Draft `match_nets`.
+
 # 0.7.0
 
 * Remove `dim_reduce`

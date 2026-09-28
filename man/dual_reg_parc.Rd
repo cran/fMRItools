@@ -2,54 +2,90 @@
 % Please edit documentation in R/dual_reg_parc.R
 \name{dual_reg_parc}
 \alias{dual_reg_parc}
-\title{Multiple regression for parcel data}
+\title{Dual Regression for parcel data}
 \usage{
 dual_reg_parc(
   BOLD,
   parc,
   parc_vals,
-  scale = c("local", "global", "none"),
-  scale_sm_xifti = NULL,
-  scale_sm_FWHM = 2,
+  drop_first = 0,
+  nuisance = NULL,
+  scrub = NULL,
   TR = NULL,
   hpf = 0.01,
+  lpf = NULL,
+  scale_by = c("mean", "sd", "FUN", "none"),
+  scale_sm_FWHM = 4,
+  scale_sm_xifti = NULL,
+  scale_FUN = NULL,
   GSR = FALSE
 )
 }
 \arguments{
-\item{BOLD}{Subject-level fMRI data matrix (\eqn{V \times T}). Rows will be
-centered.}
+\item{BOLD}{fMRI numeric data matrix (\eqn{V \times T})}
 
 \item{parc}{The parcellation as an integer vector.}
 
 \item{parc_vals}{The parcel values (keys) in desired order, e.g.
 \code{sort(unique(parc))}.}
 
-\item{scale}{\code{"local"} (default), \code{"global"}, or \code{"none"}.
-Local scaling will divide each data location's time series by its estimated
-standard deviation. Global scaling will divide the entire data matrix by the
-mean image standard deviation (\code{mean(sqrt(rowVars(BOLD)))}).}
+\item{drop_first}{(Optional) Number of volumes to drop from the start of each
+BOLD session. Default: \code{0}.}
 
-\item{scale_sm_xifti, scale_sm_FWHM}{Only applies if \code{scale=="local"} and
-\code{BOLD} represents CIFTI-format data. To smooth the standard deviation
-estimates used for local scaling, provide a \code{"xifti"} object with data
-locations in alignment with \code{BOLD}, as well as the smoothing FWHM
-(default: \code{2}). If no \code{"xifti"} object is provided (default), do
-not smooth.}
+\item{nuisance}{(Optional) Nuisance matrix to regress from the BOLD data.
+
+Nuisance regression is performed in a simultaneous regression with any spike
+regressors from \code{scrub} and DCT bases from \code{hpf}.
+
+Note that the nuisance matrix should be provided with timepoints matching
+the original \code{BOLD} irregardless of \code{drop_first}.
+Nuisance matrices will be truncated automatically if \code{drop_first>0}.}
+
+\item{scrub}{(Optional) Numeric vector of integers giving the indices
+of volumes to scrub from the BOLD data. (List the volumes to remove, not the
+ones to keep.)
+
+Scrubbing is performed within a nuisance regression by adding a spike
+regressor to the nuisance design matrix for each volume to scrub.
+
+Note that indices are counted beginning with the first index in the
+\code{BOLD} session irregardless of \code{drop_first}. The indices will be
+adjusted automatically if \code{drop_first>0}.}
 
 \item{TR}{The temporal resolution of the data, i.e. the time between volumes,
 in seconds. \code{TR} is required for detrending with \code{hpf}.}
 
-\item{hpf}{The frequency at which to apply a highpass filter to the data
-during pre-processing, in Hertz. Default: \code{0.01} Hertz. Set to \code{0}
-to disable the highpass filter.
+\item{hpf, lpf}{The frequencies at which to apply temporal filtering to the
+data during pre-processing, in Hertz. Set either to \code{NULL} to disable.
+Default: \code{0.01} Hz highpass filter, and \code{NULL} for the lowpass
+filter (disabled). Highpass filtering is accomplished by nuisance regression
+of discrete cosine transform (DCT) bases. Lowpass filtering is accomplished
+by a non-linear filter: \code{\link{fsl_bptf}}.
 
-The highpass filter serves to detrend the data, since low-frequency
-variance is associated with noise. Highpass filtering is accomplished by
-nuisance regression of discrete cosine transform (DCT) bases.
+Note the \code{TR} argument is required for temporal filtering. If
+\code{TR} is not provided, an error is raised if \code{hpf} and \code{lpf}
+have been set.}
 
-Note the \code{TR} argument is required for highpass filtering. If
-\code{TR} is not provided, \code{hpf} will be ignored.}
+\item{scale_by}{Scale the BOLD at each voxel based on either its
+\code{"mean"} (default), its \code{"sd"}, or do not scale (\code{"none"}).
+Mean scaling cannot be used if the \code{BOLD} have already been de-meaned.}
+
+\item{scale_sm_FWHM}{Full width at half maximum (FWHM) for smoothing the
+estimates of scale across brain locations (see \code{scale_by}), to reduce
+the variance of the estimates. Set to \code{0} to disable smoothing, or
+\code{Inf} for "global" smoothing (estimate and use one measure of scale
+across the entire brain). Otherwise, for "local" smoothing, this should be a
+positive number. Default: \code{4}.}
+
+\item{scale_sm_xifti}{Required only for "local" smoothing of the scale
+estimates with CIFTI data (see \code{scale_sm_FWHM}). To smooth the scale
+estimates, provide a \code{"xifti"} object aligned with \code{BOLD}. If no
+\code{"xifti"} object is provided (default) smoothing must be skipped.}
+
+\item{scale_FUN}{If \code{scale_by} is \code{"FUN"}, this function is used
+to compute the scaling measure from BOLD, after it has been centered
+(and so after dropping any volumes, and applying nuisance regression,
+scrubbing, and temporal filtering). Otherwise, ignored.}
 
 \item{GSR}{Center BOLD across columns (each image)? This
 is equivalent to performing global signal regression. Default:
@@ -61,5 +97,5 @@ the subject-level independent components \strong{S} (\eqn{Q \times V}),
 and subject-level mixing matrix \strong{A} (\eqn{TxQ}).
 }
 \description{
-Multiple regression for parcel data
+Perform multiple regression for parcel data.
 }

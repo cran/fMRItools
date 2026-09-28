@@ -19,11 +19,13 @@ export(dct_bases)
 export(dct_convert)
 export(despike_3D)
 export(detrend)
+export(dice_coef)
 export(dilate_mask_vol)
 export(dual_reg)
 export(dual_reg_parc)
 export(erode_mask_vol)
 export(expand_RPs)
+export(flags2spikes)
 export(fsl_bptf)
 export(hat_matrix)
 export(infer_format_ifti)
@@ -32,9 +34,11 @@ export(is_1)
 export(is_constant)
 export(is_integer)
 export(is_posNum)
+export(mask_BOLD)
 export(mat2UT)
 export(match_exactly)
 export(match_input)
+export(match_nets)
 export(mean_squares)
 export(norm_BOLD)
 export(nuisance_regression)
@@ -56,14 +60,17 @@ export(unvec_vol)
 export(validate_design_mat)
 export(var_decomp)
 export(vox_locations)
-importFrom(graphics,image)
-importFrom(matrixStats,rowMedians)
-importFrom(matrixStats,rowVars)
-importFrom(stats,cor)
-importFrom(stats,fitted)
-importFrom(stats,mad)
-importFrom(stats,median)
-importFrom(stats,mvfft)
-importFrom(stats,quantile)
-importFrom(stats,residuals)
-importFrom(stats,var)
+importFrom(matrixStats,
+  rowMedians,
+  rowVars
+)
+importFrom(stats,
+  cor,
+  fitted,
+  mad,
+  median,
+  mvfft,
+  quantile,
+  residuals,
+  var
+)
